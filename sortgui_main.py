@@ -177,8 +177,8 @@ class Ranklist:
             end_row = min(self.loaded_rows + self.batch_size, len(self.data))
             batch = self.data.iloc[self.loaded_rows:end_row]
             
-            # Convert to list of lists for faster insertion
-            rows = [row.tolist() for _, row in batch.iterrows()]
+            # Convert using values.tolist() for much faster insertion compared to iterrows()
+            rows = batch.values.tolist()
             
             # Use insert with a single transaction for better performance
             for values in rows:
@@ -190,9 +190,11 @@ class Ranklist:
             end_row = min(self.loaded_rows + self.batch_size, len(self.df_pivot))
             batch = self.df_pivot.iloc[self.loaded_rows:end_row]
             
-            # Insert rows
-            for idx, row in batch.iterrows():
-                values = [idx] + row.tolist()
+            # Insert rows using vectorized extraction
+            indices = batch.index.tolist()
+            rows = batch.values.tolist()
+            for idx, row_vals in zip(indices, rows):
+                values = [idx] + row_vals
                 self.tree.insert('', 'end', values=values)
             
             self.loaded_rows = end_row
