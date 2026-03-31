@@ -282,9 +282,9 @@ if __name__ == "__main__":
     test_label = ttk.Label(tab2, text="This is a test text on Tab 2")
     test_label.pack(pady=20, padx=20)
 
-    Momentumranklist = Ranklist(tab1, args=inpargs)
-    Momentumranklist.frame.pack(fill='both', expand=True)
-    Momentumranklist.create_demo_data()  # Create demo data for testing
-    Momentumranklist.update_treeview()  # Initial data load
+    Ranklist = Ranklist(tab1, args=inpargs)
+    Ranklist.frame.pack(fill='both', expand=True)
+    Ranklist.create_demo_data()  # Create demo data for testing
+    Ranklist.update_treeview()  # Initial data load
 
     root.mainloop()
