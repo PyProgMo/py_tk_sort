@@ -7,15 +7,15 @@ import threading
 import tkinter.filedialog
 
 class Ranklist:
-    def __init__(self, master, args=None):
+    def __init__(self, master, args=None, min_col_width=100, batch_size=1000):
         self.master = master
         self.index_dir = args[0] if args else None
         self.data = None
         self.sort_column = None
         self.sort_ascending = True
         self.pivoted_data = False
-        self.min_column_width = 100  # Minimum column width in pixels
-        self.batch_size = 1000  # Number of rows to load at once
+        self.min_column_width = min_col_width  # Minimum column width in pixels
+        self.batch_size = batch_size  # Number of rows to load at once
         
         # Create main frame
         self.frame = ttk.Frame(master)
